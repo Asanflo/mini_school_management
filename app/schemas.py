@@ -8,11 +8,11 @@ class NoteBase(BaseModel):
 class NoteCreate(NoteBase):
     student_id: int
 
-class NoteRead(GradeBase):
+class NoteRead(NoteBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class EtudiantBase(BaseModel):
     name: str
@@ -26,7 +26,7 @@ class EtudiantRead(EtudiantBase):
     notes: List[NoteRead] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CoursBase(BaseModel):
     title: str
@@ -35,9 +35,9 @@ class CoursBase(BaseModel):
 class CoursCreate(CoursBase):
     pass
 
-class CourseRead(CourseBase):
+class CoursRead(CoursBase):
     id: int
     notes: List[NoteRead] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
