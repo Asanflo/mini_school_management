@@ -16,7 +16,7 @@ class NoteRead(NoteBase):
 
 class EtudiantBase(BaseModel):
     name: str
-    email: str
+    email: EmailStr
 
 class EtudiantCreate(EtudiantBase):
     pass
@@ -27,6 +27,11 @@ class EtudiantRead(EtudiantBase):
 
     class Config:
         from_attributes = True
+        
+class EtudiantUpdate(EtudiantBase):
+    name: str
+    email: EmailStr
+    
 
 class CoursBase(BaseModel):
     title: str

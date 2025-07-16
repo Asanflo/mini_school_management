@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.models import Base
 
-# URL de connexion SQLite (tu peux changer facilement pour PostgreSQL/MySQL)
+# URL de connexion SQLite 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./students.db"
 
 

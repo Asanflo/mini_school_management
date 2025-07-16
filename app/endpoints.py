@@ -34,14 +34,14 @@ def get_etudiant(etudiant_id: int, db: Session = Depends(get_db)):
     return etudiant
 
 @router.put("/etudiants/{etudiant_id}", response_model=schemas.EtudiantRead)
-def update_etudiant(etudiant_id: int, db: Session = Depends(get_db)):
+def update_etudiant(etudiant_id: int, etudiant_up: schemas.EtudiantUpdate, db: Session = Depends(get_db)):
     etudiant = db.query(models.Etudiant).filter(models.Etudiant.id==etudiant_id).first()
     if not etudiant:
         raise HTTPException(status_code=404, detail="Etudiant non trouve")
-    etudiant.name = etudiant_id.name
-    etudiant.email = etudiant_id.email
+    etudiant.name = etudiant_up.name
+    etudiant.email = etudiant_up.email
     db.commit()
-    db.refresh()
+    db.refresh(etudiant)
     return etudiant   
 
 @router.delete("/etudiants/{etudiant_id}")
@@ -51,5 +51,4 @@ def delete_etudiant(etudiant_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Etudiant non trouve") 
     db.delete(etudiant)
     db.commit()
-    db.refresh()
     return {"detail":"Etudiant supprime"}
